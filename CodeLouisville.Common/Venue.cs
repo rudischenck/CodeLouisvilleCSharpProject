@@ -31,11 +31,11 @@ namespace CodeLouisville.Common
         [JsonProperty("capacity")]
         public long Capacity { get; set; }
 
-        [JsonProperty("surface")]
-        public Surface Surface { get; set; }
+        //[JsonProperty("surface")]
+        //public Surface Surface { get; set; }
 
-        [JsonProperty("roof_type")]
-        public RoofType RoofType { get; set; }
+        //[JsonProperty("roof_type")]
+        //public RoofType RoofType { get; set; }
 
         [JsonProperty("sr_id", NullValueHandling = NullValueHandling.Ignore)]
         public string SrId { get; set; }

@@ -58,6 +58,14 @@
       <Project>{6540a744-c55d-414f-934d-bad747631e08}</Project>
       <Name>CodeLouisville.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CodeLouisville.Utils\CodeLouisville.Utils.csproj">
+      <Project>{2ae6f09d-4457-4fa4-b7cc-bbae26598b68}</Project>
+      <Name>CodeLouisville.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeLouisville.Web\CodeLouisville.Web.csproj">
+      <Project>{d9188ede-1757-43ac-ac5e-70bf9f9974ce}</Project>
+      <Name>CodeLouisville.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -81,6 +81,10 @@
       <Project>{D9188EDE-1757-43AC-AC5E-70BF9F9974CE}</Project>
       <Name>CodeLouisville.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QuickType\QuickType.csproj">
+      <Project>{9d5499e3-de8e-4838-a38e-6c2a0156af27}</Project>
+      <Name>QuickType</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

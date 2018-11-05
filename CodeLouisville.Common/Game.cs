@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace CodeLouisville.Common
@@ -51,5 +52,19 @@ namespace CodeLouisville.Common
 
         [JsonProperty("scoring")]
         public Scoring Scoring { get; set; }
+
+
+        //Print matchup to console
+
+        public void DisplayMatchup()
+        {
+            Console.WriteLine(Away.Alias + " @ " + Home.Alias);
+        }
+
+        public void DisplayScore()
+        {
+            Console.WriteLine(Away.Alias + ": " + Scoring.AwayPoints.ToString() + " " + Home.Alias + ": " + Scoring.HomePoints.ToString());
+        }
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -65,7 +64,9 @@ namespace CodeLouisville.Common
 
         [JsonProperty("_comment")]
         public string Comment { get; set; }
+
     }
+
 
     public enum EndReason { FieldGoal, Touchdown };
 

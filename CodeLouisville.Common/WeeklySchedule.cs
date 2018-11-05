@@ -39,7 +39,7 @@ namespace CodeLouisville.Common
 
     public enum Status { Closed };
 
-    public enum Country { Usa };
+    public enum Country { Usa, UK };
 
     public enum RoofType { Dome, Outdoor, RetractableDome };
 
