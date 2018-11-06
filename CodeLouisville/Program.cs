@@ -29,7 +29,8 @@ namespace CodeLouisville
             while (true)
             {
                 //loop to select from nfl weekly schedules
-                Console.WriteLine("Please select a week from 1-8 or 'q' to quit");
+                Console.WriteLine();
+                Console.WriteLine("Please select a week from 1-9 or 'q' to quit");
                 string input = Console.ReadLine();
 
                 if (input.ToLower() == "q")
@@ -49,7 +50,7 @@ namespace CodeLouisville
                     continue;
                 }
 
-                if (0 >= nflWeek || nflWeek >= 8)
+                if (0 >= nflWeek || nflWeek > 9)
 
                 {
                     Console.WriteLine("That is not a valid input, please try again.");
