@@ -72,8 +72,8 @@ namespace CodeLouisville
                             counter++;
                         }
                         Console.WriteLine("Select the score you would like to see from the numbered menu above or 'q' to quit");
-
                         string input2 = Console.ReadLine();
+                        Console.WriteLine();
                         int gameNumber = -1;
                         Game game = new Game();
 
