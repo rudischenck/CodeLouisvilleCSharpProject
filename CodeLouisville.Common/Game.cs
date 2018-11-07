@@ -56,14 +56,14 @@ namespace CodeLouisville.Common
 
         //Print matchup to console
 
-        public void DisplayMatchup()
+        public string DisplayMatchup()
         {
-            Console.WriteLine(Away.Alias + " @ " + Home.Alias);
+            return Away.Alias + " @ " + Home.Alias;
         }
 
-        public void DisplayScore()
+        public string DisplayScore()
         {
-            Console.WriteLine(Away.Alias + ": " + Scoring.AwayPoints.ToString() + " " + Home.Alias + ": " + Scoring.HomePoints.ToString());
+            return Away.Alias + ": " + Scoring.AwayPoints.ToString() + " " + Home.Alias + ": " + Scoring.HomePoints.ToString();
         }
 
     }

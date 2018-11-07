@@ -13,6 +13,7 @@ using System;
 using System.IO;
 using System.Net;
 using QuickType;
+using System.Collections.Generic;
 
 namespace CodeLouisville.Web
 {
@@ -21,15 +22,17 @@ namespace CodeLouisville.Web
                 
         public static WeeklySchedule GetWeeklySchedule(int week, out string url)
         {
-            url = "";
-            WeeklySchedule data = new WeeklySchedule();
+            url = string.Format(
+                "http://api.sportradar.us/nfl/official/trial/v5/en/games/2018/REG/{0}/schedule.json?api_key=p55z9gnh7nsphukhrk36v8xf", week);
+            WeeklySchedule data = new WeeklySchedule
+            {
+                Url = url
+            };
             if (data is WeeklySchedule)
             {
                 using (var webClient = new WebClient())
                 {
                     Console.WriteLine("Downloading...");
-                    url = string.Format(
-                        "http://api.sportradar.us/nfl/official/trial/v5/en/games/2018/REG/{0}/schedule.json?api_key=p55z9gnh7nsphukhrk36v8xf", week);
                     byte[] weekData = webClient.DownloadData(url);
 
                     Console.WriteLine("Data successfully downloaded.");
@@ -77,6 +80,34 @@ namespace CodeLouisville.Web
             return data;
         }
 
+        //TODO finish these methods
+        public static void WeeklySchedulesWriteCache(List<WeeklySchedule> weeklySchedules, string fileName)
+        {
+            weeklySchedules = WeeklySchedulesReadCache();
 
+            var serializer = new JsonSerializer();
+            using (var writer = new StreamWriter(fileName))
+            using (var jsonWriter = new JsonTextWriter(writer))
+            {
+                serializer.Serialize(jsonWriter, weeklySchedules);
+            }
+        }
+
+        public static List<WeeklySchedule> WeeklySchedulesReadCache()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            var fileToRead = Path.Combine(directory.FullName, "weeks.json");
+
+            List<WeeklySchedule> weeklySchedules = new List<WeeklySchedule>();
+            var serializer = new JsonSerializer();
+            using (var reader = new StreamReader(fileToRead))
+            using (var jsonReader = new JsonTextReader(reader))
+            {
+                weeklySchedules = serializer.Deserialize<List<WeeklySchedule>>(jsonReader);
+            }
+
+            return weeklySchedules;
+        }
     }
 }

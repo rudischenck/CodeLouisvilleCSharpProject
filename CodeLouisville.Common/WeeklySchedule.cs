@@ -31,6 +31,9 @@ namespace CodeLouisville.Common
 
         [JsonProperty("_comment")]
         public string Comment { get; set; }
+
+        [JsonProperty("url")]
+        public string Url { get; set; }
     }
 
     public enum EntryMode { Ingest };
