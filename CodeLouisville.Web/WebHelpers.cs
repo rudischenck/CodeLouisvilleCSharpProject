@@ -19,17 +19,18 @@ namespace CodeLouisville.Web
     public class WebHelpers
     {
                 
-        public static WeeklySchedule GetWeeklySchedule(int week)
+        public static WeeklySchedule GetWeeklySchedule(int week, out string url)
         {
+            url = "";
             WeeklySchedule data = new WeeklySchedule();
-            if (data is Common.WeeklySchedule)
+            if (data is WeeklySchedule)
             {
                 using (var webClient = new WebClient())
                 {
                     Console.WriteLine("Downloading...");
-
-                    byte[] weekData = webClient.DownloadData(string.Format(
-                        "http://api.sportradar.us/nfl/official/trial/v5/en/games/2018/REG/{0}/schedule.json?api_key=p55z9gnh7nsphukhrk36v8xf", week));
+                    url = string.Format(
+                        "http://api.sportradar.us/nfl/official/trial/v5/en/games/2018/REG/{0}/schedule.json?api_key=p55z9gnh7nsphukhrk36v8xf", week);
+                    byte[] weekData = webClient.DownloadData(url);
 
                     Console.WriteLine("Data successfully downloaded.");
                     var serializer = new JsonSerializer();

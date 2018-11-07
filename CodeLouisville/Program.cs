@@ -59,7 +59,7 @@ namespace CodeLouisville
 
                 else
                 {
-                    var weeklySchedule = WebHelpers.GetWeeklySchedule(nflWeek);
+                    var weeklySchedule = WebHelpers.GetWeeklySchedule(nflWeek, out string url);
 
                     while (true)
                     {
