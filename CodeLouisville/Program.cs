@@ -12,13 +12,13 @@ namespace CodeLouisville
     {
         static void Main(string[] args)
         {
-            //initialize scores list, will contain scores requested by user
+            //initialize games list, will contain games requested by user
             List<Game> games = new List<Game>();
             string input = "";
             var weeklySchedule = new WeeklySchedule();
 
 
-            //directory to save .json file serialized from requested scores
+            //directory to save .json file serialized from requested games
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
             string fileToWrite = Path.Combine(directory.FullName, "games.json");
