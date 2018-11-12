@@ -1,10 +1,9 @@
-﻿using CodeLouisville.Common;
+﻿//this class contains UI elements for the program.
+
+using CodeLouisville.Common;
 using CodeLouisville.Web;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeLouisville
 {

@@ -22,11 +22,8 @@ namespace CodeLouisville.Web
 
             output = new List<string>();
 
-            //List<WeeklySchedule> weeklyScheduleCache = new List<WeeklySchedule>();
             WeeklySchedule requestedWeek = new WeeklySchedule();
 
-            //weeklyScheduleCache = ReadWeeklyScheduleCache(out string readCacheOutput);
-            //output.Add(readCacheOutput);
             try
             {
                 requestedWeek = weeklyScheduleCache.Single((weeklySchedule) => weeklySchedule.Week.Title == week);
@@ -47,20 +44,10 @@ namespace CodeLouisville.Web
                 weeklyScheduleCache.Add(requestedWeek);
 
             }
-            //try
-            //{
-            //    WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
-            //    output.Add(writeCacheOutput);
-            //}
-            ////TODO figure this out Environment.Exit(0);
-            //catch(IOException)
-            //{
-            //    output.Add("New cache file created. Please restart the program.");
-            //    Environment.Exit(0);
-            //}
             return requestedWeek;
         }
 
+        //Method for retrieving box scores, this method is not yet functional in the program
         public static BoxScore GetBoxScore(string id)
         {
             BoxScore data = new BoxScore();
@@ -91,7 +78,7 @@ namespace CodeLouisville.Web
             return data;
         }
 
-        //
+        //Writes weekly schedule cache and returns output from the process
         public static void WeeklySchedulesWriteCache(List<WeeklySchedule> weeklySchedules, out string writeCacheOutput)
         {
             writeCacheOutput = "";
@@ -107,15 +94,16 @@ namespace CodeLouisville.Web
                 try
                 {
                     serializer.Serialize(jsonWriter, weeklySchedules);
-                    writeCacheOutput += "\n Success!";
+                    writeCacheOutput += "\nSuccess!";
                 }
                 catch
                 {
-                    writeCacheOutput += "\n Failure!";
+                    writeCacheOutput += "\nFailure!";
                 }
             }
         }
 
+        //Reads weekly schedule cache and returns output from the process
         public static List<WeeklySchedule> ReadWeeklyScheduleCache(out string readCacheOutput, out bool foundCache)
         {
             foundCache = false;
@@ -156,12 +144,10 @@ namespace CodeLouisville.Web
                     }
                 }
             }
-                //TODO figure this out Environment.Exit(0);
-
-            
             return weeklyScheduleCache;
         }
 
+        //If the requested week is not found in the cache then this method downloads the weekly schedule.
         public static WeeklySchedule DownloadWeeklySchedule(int week, out string downloadWeeklyScheduleOutput)
         {
             downloadWeeklyScheduleOutput = "";

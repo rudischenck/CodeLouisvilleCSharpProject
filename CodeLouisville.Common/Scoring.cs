@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿//scoring data structure, contains the scores data the user requests.
+
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CodeLouisville.Common
 {
