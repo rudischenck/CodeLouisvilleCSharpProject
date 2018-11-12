@@ -20,6 +20,7 @@ namespace CodeLouisville
                 Console.WriteLine();
                 Console.WriteLine("Please select a week from 1-9 or 'q' to quit");
                 input = Console.ReadLine();
+                Console.WriteLine();
 
                 if (input.ToLower() == "q")
                 {

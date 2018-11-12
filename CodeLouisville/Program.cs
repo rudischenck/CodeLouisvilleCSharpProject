@@ -46,14 +46,14 @@ namespace CodeLouisville
                 {
                     Menus.GameMenu(scores, weeklySchedule, out input);
                 }
+                WebHelpers.WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
+                Console.WriteLine(writeCacheOutput);
             }
             if (scores.Count() != 0)
             {
                 ScoreSerialize.SerializeScoresToFile(scores, fileToWrite, out string serializeScoresOutput);
                 Console.WriteLine(serializeScoresOutput);
             }
-            WebHelpers.WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
-            Console.WriteLine(writeCacheOutput);
             Console.WriteLine("Thanks for using Rudi's box score fetcher! I hope you had a good time!");
 
         }
