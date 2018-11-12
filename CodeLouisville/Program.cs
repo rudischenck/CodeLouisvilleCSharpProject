@@ -48,7 +48,7 @@ namespace CodeLouisville
                 {
                     Menus.GameMenu(games, weeklySchedule, out input);
                 }
-                //write the requested week to the cache if the cache does not contain the requested week
+                //add the requested week to the cache if the cache does not contain the requested week
                 if (!weeklyScheduleCache.Contains(weeklySchedule) && weeklySchedule.Id != null)
                 {
                     weeklyScheduleCache.Add(weeklySchedule);
@@ -60,7 +60,7 @@ namespace CodeLouisville
                 GamesSerialize.SerializeGamesToFile(games, fileToWrite, out string serializeGamesOutput);
                 Console.WriteLine(serializeGamesOutput);
             }
-
+            //write cache
             WebHelpers.WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
             Console.WriteLine(writeCacheOutput);
 
