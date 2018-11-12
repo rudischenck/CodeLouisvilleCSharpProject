@@ -52,8 +52,6 @@ namespace CodeLouisville
                 if (!weeklyScheduleCache.Contains(weeklySchedule) && weeklySchedule.Id != null)
                 {
                     weeklyScheduleCache.Add(weeklySchedule);
-                    WebHelpers.WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
-                    Console.WriteLine(writeCacheOutput);
                 }
             }
             //serialize requested games to disk
@@ -62,6 +60,10 @@ namespace CodeLouisville
                 GamesSerialize.SerializeGamesToFile(games, fileToWrite, out string serializeGamesOutput);
                 Console.WriteLine(serializeGamesOutput);
             }
+
+            WebHelpers.WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
+            Console.WriteLine(writeCacheOutput);
+
             //end program
             Console.WriteLine("Thanks for using Rudi's box score fetcher! I hope you had a good time!");
 
