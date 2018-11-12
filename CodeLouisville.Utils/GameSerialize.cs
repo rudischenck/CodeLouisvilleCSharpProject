@@ -11,11 +11,11 @@ namespace CodeLouisville.Utils
 {
     public static class GamesSerialize
     {
-        public static void SerializeGamesToFile (List<Game> games, string fileName, out string serializeGamesOutput)
+        public static void SerializeGamesToFile (List<Game> games, string fileToWrite, out string serializeGamesOutput)
         {
-            serializeGamesOutput = "Serializing games to file...";
+            serializeGamesOutput = "Serializing games to following directory:\n" + fileToWrite;
             var serializer = new JsonSerializer();
-            using (var writer = new StreamWriter(fileName))
+            using (var writer = new StreamWriter(fileToWrite))
             using (var jsonWriter = new JsonTextWriter(writer))
             {
                 serializer.Serialize(jsonWriter, games);

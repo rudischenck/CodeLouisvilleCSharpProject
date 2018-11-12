@@ -88,7 +88,7 @@ namespace CodeLouisville.Web
             using (var writer = new StreamWriter(fileToWrite))
             using (var jsonWriter = new JsonTextWriter(writer))
             {
-                writeCacheOutput = "Writing weekly schedule cache.";
+                writeCacheOutput = "Writing weekly schedule cache to following directory:\n" + fileToWrite;
                 try
                 {
                     serializer.Serialize(jsonWriter, weeklySchedules);
