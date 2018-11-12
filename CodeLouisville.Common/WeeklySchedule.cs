@@ -12,7 +12,7 @@ using Newtonsoft.Json.Converters;
 namespace CodeLouisville.Common
 {
 
-    public partial class WeeklySchedule
+    public partial class WeeklySchedule : IEquatable<WeeklySchedule>
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -32,8 +32,15 @@ namespace CodeLouisville.Common
         [JsonProperty("_comment")]
         public string Comment { get; set; }
 
-        [JsonProperty("url")]
-        public string Url { get; set; }
+        public bool Equals(WeeklySchedule other)
+        {
+            return Id == other.Id;
+        }
+
+        public bool IsNullOrDefault()
+        {
+            return this == null || this == default(WeeklySchedule);
+        }
     }
 
     public enum EntryMode { Ingest };

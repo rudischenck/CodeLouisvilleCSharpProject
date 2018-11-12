@@ -1,14 +1,11 @@
-﻿// To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
-//
-//    using QuickType;
-//
-//    var boxScore = BoxScore.FromJson(jsonString);
+﻿//Helper functions for data serialization and download.
 
 
 
 
 using CodeLouisville.Common;
 using Newtonsoft.Json;
+using System.Linq;
 using System;
 using System.IO;
 using System.Net;
@@ -19,35 +16,49 @@ namespace CodeLouisville.Web
 {
     public class WebHelpers
     {
-                
-        public static WeeklySchedule GetWeeklySchedule(int week, out string url)
+        //checks cache then web and writes cache for requested weeklyschedule.        
+        public static WeeklySchedule GetWeeklySchedule(int week, out List<string> output, List<WeeklySchedule> weeklyScheduleCache)
         {
-            url = string.Format(
-                "http://api.sportradar.us/nfl/official/trial/v5/en/games/2018/REG/{0}/schedule.json?api_key=p55z9gnh7nsphukhrk36v8xf", week);
-            WeeklySchedule data = new WeeklySchedule
-            {
-                Url = url
-            };
-            if (data is WeeklySchedule)
-            {
-                using (var webClient = new WebClient())
-                {
-                    Console.WriteLine("Downloading...");
-                    byte[] weekData = webClient.DownloadData(url);
 
-                    Console.WriteLine("Data successfully downloaded.");
-                    var serializer = new JsonSerializer();
+            output = new List<string>();
 
-                    using (var stream = new MemoryStream(weekData))
-                    using (var reader = new StreamReader(stream))
-                    using (var jsonReader = new JsonTextReader(reader))
-                    {
-                        data = serializer.Deserialize<WeeklySchedule>(jsonReader);
-                    }
-                }
+            //List<WeeklySchedule> weeklyScheduleCache = new List<WeeklySchedule>();
+            WeeklySchedule requestedWeek = new WeeklySchedule();
+
+            //weeklyScheduleCache = ReadWeeklyScheduleCache(out string readCacheOutput);
+            //output.Add(readCacheOutput);
+            try
+            {
+                requestedWeek = weeklyScheduleCache.Single((weeklySchedule) => weeklySchedule.Week.Title == week);
+                output.Add("Requested week found in cache.");
             }
+            catch (ArgumentNullException)
+            {
+                output.Add("Requested week not found in cache.");
+                requestedWeek = DownloadWeeklySchedule(week, out string downloadWeeklyScheduleOutput);
+                output.Add(downloadWeeklyScheduleOutput);
+                weeklyScheduleCache.Add(requestedWeek);
+            }
+            catch (InvalidOperationException)
+            {
+                output.Add("Requested week not found in cache.");
+                requestedWeek = DownloadWeeklySchedule(week, out string downloadWeeklyScheduleOutput);
+                output.Add(downloadWeeklyScheduleOutput);
+                weeklyScheduleCache.Add(requestedWeek);
 
-            return data;
+            }
+            //try
+            //{
+            //    WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
+            //    output.Add(writeCacheOutput);
+            //}
+            ////TODO figure this out Environment.Exit(0);
+            //catch(IOException)
+            //{
+            //    output.Add("New cache file created. Please restart the program.");
+            //    Environment.Exit(0);
+            //}
+            return requestedWeek;
         }
 
         public static BoxScore GetBoxScore(string id)
@@ -80,34 +91,112 @@ namespace CodeLouisville.Web
             return data;
         }
 
-        //TODO finish these methods
-        public static void WeeklySchedulesWriteCache(List<WeeklySchedule> weeklySchedules, string fileName)
+        //
+        public static void WeeklySchedulesWriteCache(List<WeeklySchedule> weeklySchedules, out string writeCacheOutput)
         {
-            weeklySchedules = WeeklySchedulesReadCache();
+            writeCacheOutput = "";
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            var fileToWrite = Path.Combine(directory.FullName, "weekscache.json");
 
             var serializer = new JsonSerializer();
-            using (var writer = new StreamWriter(fileName))
+            using (var writer = new StreamWriter(fileToWrite))
             using (var jsonWriter = new JsonTextWriter(writer))
             {
-                serializer.Serialize(jsonWriter, weeklySchedules);
+                writeCacheOutput = "Writing weekly schedule cache.";
+                try
+                {
+                    serializer.Serialize(jsonWriter, weeklySchedules);
+                    writeCacheOutput += "\n Success!";
+                }
+                catch
+                {
+                    writeCacheOutput += "\n Failure!";
+                }
             }
         }
 
-        public static List<WeeklySchedule> WeeklySchedulesReadCache()
+        public static List<WeeklySchedule> ReadWeeklyScheduleCache(out string readCacheOutput, out bool foundCache)
         {
+            foundCache = false;
+            readCacheOutput = "";
+            List <WeeklySchedule> weeklyScheduleCache = new List<WeeklySchedule>();
+
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            var fileToRead = Path.Combine(directory.FullName, "weeks.json");
+            string scoresCacheFile = Path.Combine(directory.FullName, "weekscache.json");
 
-            List<WeeklySchedule> weeklySchedules = new List<WeeklySchedule>();
-            var serializer = new JsonSerializer();
-            using (var reader = new StreamReader(fileToRead))
-            using (var jsonReader = new JsonTextReader(reader))
+            if (!File.Exists(scoresCacheFile))
             {
-                weeklySchedules = serializer.Deserialize<List<WeeklySchedule>>(jsonReader);
+                
+                File.Create(scoresCacheFile);
+                readCacheOutput = "The weekly schedule cache was not found and has been created. Please restart the program.";
+                return weeklyScheduleCache;
+            }
+            else
+            {
+                foundCache = true;
+                var serializer = new JsonSerializer();
+                using (var reader = new StreamReader(scoresCacheFile))
+                using (var jsonReader = new JsonTextReader(reader))
+                {
+                    readCacheOutput = "Reading weekly schedule cache...";
+                    try
+                    {
+                        weeklyScheduleCache = serializer.Deserialize<List<WeeklySchedule>>(jsonReader);
+                        if (weeklyScheduleCache == null)
+                        {
+                            weeklyScheduleCache = new List<WeeklySchedule>();
+                        }
+                        readCacheOutput += "\nSuccess!";
+                    }
+                    catch
+                    {
+                        readCacheOutput += "\nFailure!";
+                    }
+                }
+            }
+                //TODO figure this out Environment.Exit(0);
+
+            
+            return weeklyScheduleCache;
+        }
+
+        public static WeeklySchedule DownloadWeeklySchedule(int week, out string downloadWeeklyScheduleOutput)
+        {
+            downloadWeeklyScheduleOutput = "";
+            var weeklySchedule = new WeeklySchedule();
+
+
+            using (var webClient = new WebClient())
+            {
+
+                string url = string.Format(
+                    "http://api.sportradar.us/nfl/official/trial/v5/en/games/2018/REG/{0}/schedule.json?api_key=p55z9gnh7nsphukhrk36v8xf", week.ToString());
+
+                downloadWeeklyScheduleOutput = "Downloading data...";
+
+                try
+                {
+                    byte[] weekData = webClient.DownloadData(url);
+                    var serializer = new JsonSerializer();
+
+                    using (var stream = new MemoryStream(weekData))
+                    using (var reader = new StreamReader(stream))
+                    using (var jsonReader = new JsonTextReader(reader))
+                    {
+                        weeklySchedule = serializer.Deserialize<WeeklySchedule>(jsonReader);
+                    }
+                    downloadWeeklyScheduleOutput += "\nData successfully downloaded.";
+                }
+                catch
+                {
+                    downloadWeeklyScheduleOutput += "\nDownload failed!";
+                }
             }
 
-            return weeklySchedules;
+
+            return weeklySchedule;
         }
     }
 }
