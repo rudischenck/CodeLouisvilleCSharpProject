@@ -49,7 +49,7 @@ namespace CodeLouisville
                     Menus.GameMenu(games, weeklySchedule, out input);
                 }
                 //add the requested week to the cache if the cache does not contain the requested week
-                if (!weeklyScheduleCache.Contains(weeklySchedule) && weeklySchedule.Id != null)
+                if (weeklySchedule.Id != null && !weeklyScheduleCache.Contains(weeklySchedule))
                 {
                     weeklyScheduleCache.Add(weeklySchedule);
                 }
