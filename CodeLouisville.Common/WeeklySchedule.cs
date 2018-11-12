@@ -31,10 +31,6 @@ namespace CodeLouisville.Common
             return Id == other.Id;
         }
 
-        public bool IsNullOrDefault()
-        {
-            return this == null || this == default(WeeklySchedule);
-        }
     }
 
     public enum EntryMode { Ingest };

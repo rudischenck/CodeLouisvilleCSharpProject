@@ -13,7 +13,7 @@ namespace CodeLouisville
         static void Main(string[] args)
         {
             //initialize scores list, will contain scores requested by user
-            List<Scoring> scores = new List<Scoring>();
+            List<Game> games = new List<Game>();
             string input = "";
             var weeklySchedule = new WeeklySchedule();
 
@@ -21,7 +21,7 @@ namespace CodeLouisville
             //directory to save .json file serialized from requested scores
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            string fileToWrite = Path.Combine(directory.FullName, "scores.json");
+            string fileToWrite = Path.Combine(directory.FullName, "games.json");
 
             
             Console.WriteLine("Welcome to Rudi's Box Score Fetcher!");
@@ -44,15 +44,15 @@ namespace CodeLouisville
                 weeklySchedule = Menus.WeekMenu(out input, weeklyScheduleCache);
                 if (input.ToLower() != "q")
                 {
-                    Menus.GameMenu(scores, weeklySchedule, out input);
+                    Menus.GameMenu(games, weeklySchedule, out input);
                 }
                 WebHelpers.WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
                 Console.WriteLine(writeCacheOutput);
             }
-            if (scores.Count() != 0)
+            if (games.Count() != 0)
             {
-                ScoreSerialize.SerializeScoresToFile(scores, fileToWrite, out string serializeScoresOutput);
-                Console.WriteLine(serializeScoresOutput);
+                GamesSerialize.SerializeGamesToFile(games, fileToWrite, out string serializeGamesOutput);
+                Console.WriteLine(serializeGamesOutput);
             }
             Console.WriteLine("Thanks for using Rudi's box score fetcher! I hope you had a good time!");
 

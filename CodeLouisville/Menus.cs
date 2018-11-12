@@ -61,7 +61,7 @@ namespace CodeLouisville
             return weeklySchedule;
         }
 
-        public static void GameMenu(List<Scoring> scores, WeeklySchedule weeklySchedule, out string input)
+        public static void GameMenu(List<Game> games, WeeklySchedule weeklySchedule, out string input)
         {
             input = "";
             if (weeklySchedule != null)
@@ -111,9 +111,9 @@ namespace CodeLouisville
                         continue;
                     }
 
-                    if (!scores.Contains(game.Scoring))
+                    if (!games.Contains(game))
                     {
-                        scores.Add(game.Scoring);
+                        games.Add(game);
                     }
 
                     Console.WriteLine(game.DisplayScore());

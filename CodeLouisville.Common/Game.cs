@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CodeLouisville.Common
 {
-    public partial class Game
+    public partial class Game : IEquatable<Game>
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -66,5 +66,9 @@ namespace CodeLouisville.Common
             return Away.Alias + ": " + Scoring.AwayPoints.ToString() + " " + Home.Alias + ": " + Scoring.HomePoints.ToString();
         }
 
+        public bool Equals(Game other)
+        {
+            return Id == other.Id;
+        }
     }
 }

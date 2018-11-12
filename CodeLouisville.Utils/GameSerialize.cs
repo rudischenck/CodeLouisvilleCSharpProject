@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace CodeLouisville.Utils
 {
-    public static class ScoreSerialize
+    public static class GamesSerialize
     {
-        public static void SerializeScoresToFile (List<Scoring> scores, string fileName, out string serializeScoresOutput)
+        public static void SerializeGamesToFile (List<Game> games, string fileName, out string serializeGamesOutput)
         {
-            serializeScoresOutput = "Serializing scores to file...";
+            serializeGamesOutput = "Serializing games to file...";
             var serializer = new JsonSerializer();
             using (var writer = new StreamWriter(fileName))
             using (var jsonWriter = new JsonTextWriter(writer))
             {
-                serializer.Serialize(jsonWriter, scores);
+                serializer.Serialize(jsonWriter, games);
             }
-            serializeScoresOutput += "\nSerializing success!";
+            serializeGamesOutput += "\nSerializing success!";
         }
 
     }
