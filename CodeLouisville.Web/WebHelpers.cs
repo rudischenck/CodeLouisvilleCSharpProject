@@ -16,7 +16,7 @@ namespace CodeLouisville.Web
 {
     public class WebHelpers
     {
-        //checks cache then web and writes cache for requested weeklyschedule.        
+        //checks cache then web for requested weeklyschedule.        
         public static WeeklySchedule GetWeeklySchedule(int week, out List<string> output, List<WeeklySchedule> weeklyScheduleCache)
         {
 
@@ -34,14 +34,12 @@ namespace CodeLouisville.Web
                 output.Add("Requested week not found in cache.");
                 requestedWeek = DownloadWeeklySchedule(week, out string downloadWeeklyScheduleOutput);
                 output.Add(downloadWeeklyScheduleOutput);
-                weeklyScheduleCache.Add(requestedWeek);
             }
             catch (InvalidOperationException)
             {
                 output.Add("Requested week not found in cache.");
                 requestedWeek = DownloadWeeklySchedule(week, out string downloadWeeklyScheduleOutput);
                 output.Add(downloadWeeklyScheduleOutput);
-                weeklyScheduleCache.Add(requestedWeek);
 
             }
             return requestedWeek;

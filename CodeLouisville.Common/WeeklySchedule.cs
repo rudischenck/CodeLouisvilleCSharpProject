@@ -26,9 +26,21 @@ namespace CodeLouisville.Common
         [JsonProperty("_comment")]
         public string Comment { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            WeeklySchedule objAsWeeklySchedule = obj as WeeklySchedule;
+            if (objAsWeeklySchedule == null) return false;
+            else return Equals(objAsWeeklySchedule);
+
+        }
+        public override int GetHashCode()
+        {
+            return Week.Id.GetHashCode();
+        }
         public bool Equals(WeeklySchedule other)
         {
-            return Id == other.Id;
+            return Week.Id == other.Week.Id;
         }
 
     }
