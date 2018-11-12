@@ -39,6 +39,8 @@ namespace CodeLouisville
                 Console.WriteLine(readCacheOutput);
             }
 
+
+            //main loop for displaying menus
             while (input.ToLower() != "q")
             {
                 weeklySchedule = Menus.WeekMenu(out input, weeklyScheduleCache);
@@ -49,11 +51,13 @@ namespace CodeLouisville
                 WebHelpers.WeeklySchedulesWriteCache(weeklyScheduleCache, out string writeCacheOutput);
                 Console.WriteLine(writeCacheOutput);
             }
+            //serialize requested games to disk
             if (games.Count() != 0)
             {
                 GamesSerialize.SerializeGamesToFile(games, fileToWrite, out string serializeGamesOutput);
                 Console.WriteLine(serializeGamesOutput);
             }
+            //end program
             Console.WriteLine("Thanks for using Rudi's box score fetcher! I hope you had a good time!");
 
         }

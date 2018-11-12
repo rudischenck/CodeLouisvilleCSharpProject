@@ -9,6 +9,7 @@ namespace CodeLouisville
 {
     class Menus
     {
+        //menu that displays weeks to select from
         public static WeeklySchedule WeekMenu(out string input, List<WeeklySchedule> weeklyScheduleCache)
         {
             var output = new List<string>();
@@ -111,6 +112,7 @@ namespace CodeLouisville
                         continue;
                     }
 
+                    //add the requested score's game to the game list to be serialized to disk
                     if (!games.Contains(game))
                     {
                         games.Add(game);
