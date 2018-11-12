@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeLouisville", "CodeLouis
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeLouisville.Common", "CodeLouisville.Common\CodeLouisville.Common.csproj", "{6540A744-C55D-414F-934D-BAD747631E08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoccerStats", "..\..\..\Downloads\csharp-SoccerStats-b63e4c65fcb101a1c9fb6204dfb1606f72cb553d\SoccerStats\SoccerStats\SoccerStats.csproj", "{C86F2C22-C9E9-42EA-A42D-439BAD8C568A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeLouisville.Web", "CodeLouisville.Web\CodeLouisville.Web.csproj", "{D9188EDE-1757-43AC-AC5E-70BF9F9974CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeLouisville.WebTests", "CodeLouisville.WebTests\CodeLouisville.WebTests.csproj", "{97B11B5D-6FEB-427C-8FA6-B388CA00DDCA}"
@@ -36,10 +34,6 @@ Global
 		{6540A744-C55D-414F-934D-BAD747631E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6540A744-C55D-414F-934D-BAD747631E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6540A744-C55D-414F-934D-BAD747631E08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C86F2C22-C9E9-42EA-A42D-439BAD8C568A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C86F2C22-C9E9-42EA-A42D-439BAD8C568A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C86F2C22-C9E9-42EA-A42D-439BAD8C568A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C86F2C22-C9E9-42EA-A42D-439BAD8C568A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9188EDE-1757-43AC-AC5E-70BF9F9974CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9188EDE-1757-43AC-AC5E-70BF9F9974CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9188EDE-1757-43AC-AC5E-70BF9F9974CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
