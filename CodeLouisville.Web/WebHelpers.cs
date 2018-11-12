@@ -116,7 +116,8 @@ namespace CodeLouisville.Web
             {
                 
                 File.Create(scoresCacheFile);
-                readCacheOutput = "The weekly schedule cache was not found and has been created. Please restart the program.";
+                readCacheOutput = 
+                    "The weekly schedule cache was not found and has been created. The file was created at:\n" + scoresCacheFile + "\nPlease restart the program.";
                 return weeklyScheduleCache;
             }
             else
