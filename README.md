@@ -1,6 +1,6 @@
 #Welcome to Rudi's Code Louisville C# project!
 _______________________________________________
-## The API keys required for this project have expired.
+
 The code works but the program can no longer make the necessary API calls due to expired keys.
 
 This is a console program that prompts the user to select an nfl week, then a game.
