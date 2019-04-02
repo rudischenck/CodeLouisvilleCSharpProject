@@ -1,7 +1,6 @@
 #Welcome to Rudi's Code Louisville C# project!
 _______________________________________________
 
-The code works but the program can no longer make the necessary API calls due to expired keys.
 
 This is a console program that prompts the user to select an nfl week, then a game.
 The program will then print the score to the console, and add the game to a list of games to be serialized into the games.json file.
